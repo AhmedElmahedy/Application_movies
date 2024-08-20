@@ -2,7 +2,6 @@ import 'package:app_movies/browse/browse_tab.dart';
 import 'package:app_movies/search/search_tab.dart';
 import 'package:app_movies/watchlist/watch_list_tab.dart';
 import 'package:flutter/material.dart';
-
 import 'app_colors.dart';
 import 'home/home_tab.dart';
 import 'my_theme_data.dart';
@@ -16,7 +15,6 @@ static const String routeName = 'Home Screen';
 
 class _HomeScreenState extends State<HomeScreen> {
 int selectCurrentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +47,6 @@ int selectCurrentIndex = 0;
       body: tabs[selectCurrentIndex],
     );
   }
-
   List<Widget> tabs = [
     HomeTab(),SearchTab(),BrowseTab(),WatchListTab()
   ];
