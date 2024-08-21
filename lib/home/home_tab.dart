@@ -1,4 +1,5 @@
 import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/home/details/details_screen.dart';
 import 'package:app_movies/home/names_movies.dart';
 import 'package:app_movies/home/new_releases.dart';
 import 'package:app_movies/home/recommended.dart';
@@ -13,15 +14,22 @@ class HomeTab extends StatelessWidget {
         children: [
           /// top Screen
           Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.36,
-              color: AppColors.background,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context , int index){
-                    return NamesMovies();
-                  })
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return DetailsScreen();
+                }));
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.36,
+                color: AppColors.background,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 20,
+                    itemBuilder: (context , int index){
+                      return NamesMovies();
+                    })
+              ),
             ),
           ),
           SizedBox(
