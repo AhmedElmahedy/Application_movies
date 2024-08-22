@@ -20,7 +20,7 @@ int selectCurrentIndex = 0;
     return Scaffold(
       bottomNavigationBar: Theme(
         data: Theme.of(context)
-            .copyWith(canvasColor: MyThemeData.appTheme.primaryColor),
+            .copyWith(canvasColor: MyThemeData.darkTheme.primaryColor),
         child: BottomNavigationBar(
           selectedItemColor: AppColors.yellowColor,
           currentIndex: selectCurrentIndex,
