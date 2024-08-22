@@ -14,6 +14,7 @@ class MyThemeData {
           fontSize: 14 ,
           fontWeight: FontWeight.w400
       ),
+      titleMedium: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25)
     ),
   );
 }
