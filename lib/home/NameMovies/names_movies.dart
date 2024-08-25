@@ -19,19 +19,19 @@ class _NamesMoviesState extends State<NamesMovies> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
                 child: CircularProgressIndicator(
-              color: AppColors.background,
+              color: AppColors.yellowColor,
             ));
           }
           else if (snapshot.hasError) {
             return Column(
               children: [
-                Text("Something went wrong"),
+                const Text("Something went wrong"),
                 ElevatedButton(onPressed: () {
                   ApiManager.getPopular();
                   setState(() {
                   });
                 },
-                    child: Text("Try agin")),
+                    child: const Text("Try agin")),
               ],
             );
           }
@@ -39,22 +39,26 @@ class _NamesMoviesState extends State<NamesMovies> {
           if (snapshot.data!.success == false) {
             return Column(
               children: [
-                Text(snapshot.data!.statusMessage ?? 'Unknown error',
-                    style:  TextStyle(color: AppColors.whiteColor)),
+                Padding(
+                  padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+                  child: Text(snapshot.data!.statusMessage ?? 'Unknown error',
+                      style:  const TextStyle(color: AppColors.whiteColor)),
+                ),
                 ElevatedButton(
                     onPressed: () {
                       ApiManager.getPopular();
                       setState(() {
                       });
-                    }, child:  Text("Try again Server"))
+                    }, child:  const Text("Try again Server"))
               ],
             );
           }
-
-
-
           var list = snapshot.data!.results!;
           return ItemsNameMovies(resultsList: list );
+
+
+
+
           // return ListView.builder(
           //     scrollDirection: Axis.horizontal,
           //     itemBuilder: (context, index) {
