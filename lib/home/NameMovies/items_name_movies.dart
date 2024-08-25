@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ItemsNameMovies extends StatelessWidget {
   List<Results> resultsList;
 
-  ItemsNameMovies({required this.resultsList});
+  ItemsNameMovies({ required this.resultsList});
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
