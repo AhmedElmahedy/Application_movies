@@ -1,4 +1,5 @@
 import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/home/details/details_screen.dart';
 import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 class NewReleasesWidget extends StatelessWidget {
   final Results results;
   NewReleasesWidget({required this.results});
+
   @override
   Widget build(BuildContext context) {
     String baseUrl = 'https://image.tmdb.org/t/p/w500';
@@ -17,12 +19,30 @@ class NewReleasesWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: CachedNetworkImage(
-                  imageUrl: results.posterPath != null ?
-                  "$baseUrl${results.posterPath}" : '',
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator(color: AppColors.yellowColor,)),
-                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error,
-                  color: AppColors.yellowColor,)),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                                  results: results,
+                                  // moviesId: results.id!,
+                                )));
+                  },
+                  child: CachedNetworkImage(
+                    imageUrl: results.posterPath != null
+                        ? "$baseUrl${results.posterPath}"
+                        : '',
+                    placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                      color: AppColors.yellowColor,
+                    )),
+                    errorWidget: (context, url, error) => const Center(
+                        child: Icon(
+                      Icons.error,
+                      color: AppColors.yellowColor,
+                    )),
+                  ),
                 ),
               ),
             ),

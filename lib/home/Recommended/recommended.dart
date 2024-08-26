@@ -3,9 +3,14 @@ import 'package:app_movies/app_colors.dart';
 import 'package:app_movies/home/Recommended/recommended_widget.dart';
 import 'package:flutter/material.dart';
 
-class Recommended extends StatelessWidget {
+class Recommended extends StatefulWidget {
   const Recommended({super.key});
 
+  @override
+  State<Recommended> createState() => _RecommendedState();
+}
+
+class _RecommendedState extends State<Recommended> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -20,6 +25,9 @@ class Recommended extends StatelessWidget {
                 Text("Something went wrong"),
                 ElevatedButton(onPressed: (){
                   ApiManager.getRecommended();
+                  setState(() {
+
+                  });
                 },
                     child: Text("Try Again"))
               ],
@@ -32,6 +40,8 @@ class Recommended extends StatelessWidget {
                 Text(snapshot.data!.statusMessage ?? 'UnKnown error'),
                 ElevatedButton(onPressed: (){
                   ApiManager.getRecommended();
+                  setState(() {
+                  });
                 },
                     child: Text("Try Again Server"))
               ],

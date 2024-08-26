@@ -1,42 +1,66 @@
+import 'package:app_movies/api/api_manager.dart';
 import 'package:app_movies/app_colors.dart';
 import 'package:app_movies/home/details/more_like_this.dart';
+import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
-
+  final Results results ;
+  DetailsScreen({required this.results
+  });
   @override
   Widget build(BuildContext context) {
+
+    String baseUrl = 'https://image.tmdb.org/t/p/w500';
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       appBar: AppBar(
         foregroundColor: AppColors.whiteColor,
         backgroundColor: AppColors.background,
+        centerTitle: true,
         title: Text(
-          "Dora and the lost city of gold",
+          results.title ?? '',
           style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 20),
         ),
       ),
       body: Column(children: [
         /// Top screen
-        Container(
-          height: MediaQuery.of(context).size.height * 0.55,
+        SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset("assets/images/Image_test.png",
-              fit: BoxFit.fill,),
+              CachedNetworkImage(
+                imageUrl: results.backdropPath != null ?
+                "$baseUrl${results.backdropPath}":'',
+                placeholder: (context, url) => const
+                    Center(child: CircularProgressIndicator(color: AppColors.yellowColor)),
+                errorWidget: (context, url, error) => const
+                    Center(child: Icon(Icons.error, color: AppColors.yellowColor)),
+              ),
+
+
+
+
+
+
+
+
+
+
+
+              /// Center Screen
               Padding(
                 padding:  const EdgeInsets.symmetric(horizontal: 6),
-                child: Text('Dora and the lost city of gold',
+                child: Text(results.title ?? '',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontSize: 18
                 ),),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: Text('2019  PG-13  2h 7m',
+                child: Text(results.releaseDate ?? '',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontSize: 10,
                       color: AppColors.silverColor
@@ -46,12 +70,14 @@ class DetailsScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: Image.asset(
-                      'assets/images/Image.png',
+                    child: CachedNetworkImage(
+                        imageUrl: results.posterPath != null ? "$baseUrl${results.posterPath}" : '',
+                      placeholder: (context, url) => Center(child: CircularProgressIndicator(color: AppColors.yellowColor)),
+                      errorWidget: (context, url, error) => Center(child: Icon(Icons.error, color: AppColors.yellowColor)),
                       height: MediaQuery.of(context).size.height * 0.23,
                       width: MediaQuery.of(context).size.width * 0.25,
                       fit: BoxFit.fill,
-                    ),
+                    )
                   ),
                   SizedBox(
                     width:MediaQuery.of(context).size.width *0.7,
@@ -71,30 +97,35 @@ class DetailsScreen extends StatelessWidget {
                                     border:  Border.all(width: 1,
                                     color: AppColors.iconBookMarkColor),
                                   ),
-                                  child: Text("Action",
+                                  child: Text(results.originalTitle ?? '',
                                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontSize: 10
+                                    fontSize: 10,
+                                    color: AppColors.silverColor
                                   ),
                                   textAlign: TextAlign.center,),
-
                                 ),
                               ],
                             ),
                           ),
-                          Text("Having spent most of her life exploring the jungle,"
-                              " nothing could prepare Dora for her most dangerous adventure yet"
-                              " — high school. ",
+                          Text(results.overview ?? '',
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontSize: 13
-                          ),),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("7.7",
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontSize: 18
-                            ),),
+                            fontSize: 13,
+                            color: AppColors.silverColor
+                          ),
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.star_rounded,
+                              color: AppColors.yellowColor,),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("7.7",
+                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontSize: 18
+                                ),),
+                              ),
+                            ],
                           )
-
                         ],
                       ),
                     ),
@@ -124,15 +155,40 @@ class DetailsScreen extends StatelessWidget {
                       ?.copyWith(fontSize: 15),
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return MoreLikeThis();
-                    }),
-              )
-
+              
+              FutureBuilder(
+                  future: ApiManager.getSimilarMovies(results.id ?? 0), 
+                  builder: (context , snapshot){
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return CircularProgressIndicator();
+                    }else if (snapshot.hasError){
+                      return Column(
+                        children: [
+                          Text('Something Went Wrong'),
+                          ElevatedButton(onPressed: (){},
+                              child: Text("Try again"))
+                        ],
+                      );
+                    }if(snapshot.data!.success == false){
+                      return Column(
+                        children: [
+                          Text('Error: ${snapshot.data!.statusMessage}'),
+                          ElevatedButton(onPressed: (){},
+                              child: Text("Try again Server"))
+                        ],
+                      );
+                    }
+                    var similarList = snapshot.data!.results!;
+                    return Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: similarList.length,
+                          itemBuilder: (context , index){
+                          var similar = similarList[index];
+                            return MoreLikeThis(similar: similar);
+                          }),
+                    );
+                  })
             ],
           ),
         )
@@ -140,3 +196,20 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 }
+// Image.asset(
+// 'assets/images/Image.png',
+// height: MediaQuery.of(context).size.height * 0.23,
+// width: MediaQuery.of(context).size.width * 0.25,
+// fit: BoxFit.fill,
+// ),
+
+
+
+// Expanded(
+//   child: ListView.builder(
+//     scrollDirection: Axis.horizontal,
+//     itemCount: 20,
+//       itemBuilder: (context, index) {
+//         return MoreLikeThis();
+//       }),
+// )

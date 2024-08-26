@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:app_movies/api/api_constants.dart';
 import 'package:app_movies/model/ResponsePopularSuccess.dart';
 import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
+import 'package:app_movies/model/ResponseSimilarMovies.dart';
 import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,7 +12,7 @@ class ApiManager {
   static Future<ResponsePopularSuccess?> getPopular() async {
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.popularApi,
         {
-          'api_key' : ApiConstants.apiKay
+          'api_key' : ApiConstants.apiKay,
         });
     try{
       var response = await http.get(url);
@@ -45,6 +46,21 @@ class ApiManager {
       return ResponseRecommendedSuccess.fromJson(jsonDecode(response.body));
     }catch(e){
       throw e;
+    }
+  }
+
+
+
+  /// https://api.themoviedb.org/3/movie/{movie_id}/similar
+  static Future<ResponseSimilarMovies?> getSimilarMovies(int movie_Id)async{
+    Uri url = Uri.https(ApiConstants.baseUrl, '/3/movie/$movie_Id/similar',{
+      'api_key': ApiConstants.apiKay
+    });
+    try {
+      var response = await http.get(url);
+      return ResponseSimilarMovies.fromJson(jsonDecode(response.body));
+      } catch(e){
+      throw e ;
     }
   }
 }

@@ -36,16 +36,6 @@ class HomeTab extends StatelessWidget {
                     ),),
                 ),
                 NewReleases()
-                // Expanded(
-                //   child:
-                //   ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: 20,
-                //       itemBuilder: (context,index) {
-                //         return  NewReleases();
-                //       },
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -66,9 +56,6 @@ class HomeTab extends StatelessWidget {
                     ),),
                 ),
                 Recommended()
-
-
-
               ],
             )
           ),

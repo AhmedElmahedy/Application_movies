@@ -1,34 +1,32 @@
-class ResponseRecommendedSuccess {
-  ResponseRecommendedSuccess({
-    this.page,
-    this.statusCode,
-    this.success,
-    this.statusMessage,
-    this.results,
-    this.totalPages,
-    this.totalResults,
-  });
+class ResponseSimilarMovies {
+  ResponseSimilarMovies({
+      this.page,
+      this.statusCode,
+      this.statusMessage,
+      this.success,
+      this.results,
+      this.totalPages, 
+      this.totalResults,});
 
-  ResponseRecommendedSuccess.fromJson(dynamic json) {
+  ResponseSimilarMovies.fromJson(dynamic json) {
     page = json['page'];
     statusCode = json['status_code'];
-    success = json['success'];
     statusMessage = json['status_message'];
+    success = json['success'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(Similar.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
   int? page;
   int? statusCode;
-  bool? success;
   String? statusMessage;
-  List<Results>? results;
+  bool? success ;
+  List<Similar>? results;
   int? totalPages;
   int? totalResults;
 
@@ -42,27 +40,27 @@ class ResponseRecommendedSuccess {
     map['total_results'] = totalResults;
     return map;
   }
+
 }
 
-class Results {
-  Results({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
-  });
+class Similar {
+  Similar({
+      this.adult, 
+      this.backdropPath, 
+      this.genreIds, 
+      this.id, 
+      this.originalLanguage, 
+      this.originalTitle, 
+      this.overview, 
+      this.popularity, 
+      this.posterPath, 
+      this.releaseDate, 
+      this.title, 
+      this.video, 
+      this.voteAverage, 
+      this.voteCount,});
 
-  Results.fromJson(dynamic json) {
+  Similar.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
@@ -78,7 +76,6 @@ class Results {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -112,4 +109,5 @@ class Results {
     map['vote_count'] = voteCount;
     return map;
   }
+
 }

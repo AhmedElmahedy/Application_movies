@@ -13,57 +13,60 @@ class NewReleases extends StatefulWidget {
 class _NewReleasesState extends State<NewReleases> {
   @override
   Widget build(BuildContext context) {
-   return FutureBuilder(
-       future: ApiManager.getUpcoming(),
-       builder: (context , snapshot){
-         if(snapshot.connectionState == ConnectionState.waiting){
-           return Center(child: CircularProgressIndicator(color: AppColors.yellowColor));
-         }
-         else if (snapshot.hasError){
-           return Column(
-             children: [
-               Text('Something Went Wrong.'),
-               ElevatedButton(onPressed: (){
-                 ApiManager.getUpcoming();
-                 setState(() {
+    return FutureBuilder(
+        future: ApiManager.getUpcoming(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+                child: CircularProgressIndicator(color: AppColors.yellowColor));
+          } else if (snapshot.hasError) {
+            return Column(
+              children: [
+                const Text('Something Went Wrong.'),
+                ElevatedButton(
+                    onPressed: () {
+                      ApiManager.getUpcoming();
+                      setState(() {});
+                    },
+                    child: const Text("Try Again"))
+              ],
+            );
+          }
 
-                 });
-                 }, child: Text("Try Again"))
-             ],
-           );
-         }
-         /// server => success , error
-         if(snapshot.data!.success == false){
-           return Padding(
-             padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height *0.05),
-             child: Column(
-               children: [
-                 Text(snapshot.data!.statusMessage ?? 'UnKnown error',
-                 style: Theme.of(context).textTheme.titleSmall,),
-                 ElevatedButton(onPressed: (){
-                   ApiManager.getUpcoming();
-                   setState(() {
-                   });
-                 }, child: Text("Try Again Server",))
-               ],
-             ),
-           );
-         }
-         var list = snapshot.data!.results! ;
-         return Expanded(
-           child: ListView.builder(
-               scrollDirection: Axis.horizontal,
-               itemCount: list.length,
-               itemBuilder: (context, index){
-                 return NewReleasesWidget(results: list[index]);
-           }),
-         );
-       });
-
-
-
-
-
+          /// server => success , error
+          if (snapshot.data!.success == false) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.05),
+              child: Column(
+                children: [
+                  Text(
+                    snapshot.data!.statusMessage ?? 'UnKnown error',
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        ApiManager.getUpcoming();
+                        setState(() {});
+                      },
+                      child: const Text(
+                        "Try Again Server",
+                      ))
+                ],
+              ),
+            );
+          }
+          var list = snapshot.data!.results!;
+          return Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  var results = list[index];
+                  return NewReleasesWidget(results: results);
+                }),
+          );
+        });
 
     // return Row(
     //   children: [
