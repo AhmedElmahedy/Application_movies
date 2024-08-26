@@ -16,8 +16,8 @@ class MoviesDetails extends StatelessWidget {
       Row(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width*0.2,
-            height:MediaQuery.of(context).size.width*0.12,
+            width: MediaQuery.of(context).size.width*0.40,
+            height:MediaQuery.of(context).size.height*0.12,
             child: Stack(
               children: [
                 Image.asset(
