@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class RecommendedWidget extends StatelessWidget {
   final Results results;
-  RecommendedWidget({required this.results});
+  const RecommendedWidget({super.key, required this.results});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,10 @@ class RecommendedWidget extends StatelessWidget {
                   imageUrl: results.posterPath != null
                       ? "$baseUrl${results.posterPath}"
                       : '',
-                  placeholder: (context, url) => const  Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      const Center(child: Icon(Icons.error)),
                   fit: BoxFit.fill,
                   height: MediaQuery.of(context).size.height * 0.15,
                 )),
@@ -109,4 +111,3 @@ class RecommendedWidget extends StatelessWidget {
     );
   }
 }
-// height: MediaQuery.of(context).size.height *0.15,

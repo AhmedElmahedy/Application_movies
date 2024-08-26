@@ -5,8 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class NewReleasesWidget extends StatelessWidget {
+  const NewReleasesWidget({super.key, required this.results});
   final Results results;
-  NewReleasesWidget({required this.results});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class NewReleasesWidget extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => DetailsScreen(
                                   results: results,
-                                  // moviesId: results.id!,
                                 )));
                   },
                   child: CachedNetworkImage(
