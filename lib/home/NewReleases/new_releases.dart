@@ -67,36 +67,5 @@ class _NewReleasesState extends State<NewReleases> {
                 }),
           );
         });
-
-    // return Row(
-    //   children: [
-    //     Stack(
-    //       children: [
-    //         Padding(
-    //           padding: const EdgeInsets.all(8.0),
-    //           child: ClipRRect(
-    //             borderRadius: BorderRadius.circular(6),
-    //             child: Image.asset('assets/images/Image.png'),
-    //           ),
-    //         ),
-    //         const Padding(
-    //           padding: EdgeInsets.only(top: 5, left: 3),
-    //           child: Icon(
-    //             Icons.bookmark,
-    //             color: AppColors.iconBookMarkColor,
-    //           ),
-    //         ),
-    //         const Padding(
-    //           padding: EdgeInsets.all(8.0),
-    //           child: Icon(
-    //             Icons.add,
-    //             color: AppColors.whiteColor,
-    //             size: 12,
-    //           ),
-    //         )
-    //       ],
-    //     )
-    //   ],
-    // );
   }
 }
