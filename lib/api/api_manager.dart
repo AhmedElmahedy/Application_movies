@@ -4,8 +4,10 @@ import 'package:app_movies/api/api_constants.dart';
 import 'package:app_movies/model/ResponseDetailsSuccess.dart';
 import 'package:app_movies/model/ResponsePopularSuccess.dart';
 import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
+import 'package:app_movies/model/ResponseSearchSuccess.dart';
 import 'package:app_movies/model/ResponseSimilarMovies.dart';
 import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class ApiManager {
@@ -69,6 +71,19 @@ class ApiManager {
       return ResponseSimilarMovies.fromJson(jsonDecode(response.body));
     } catch (e) {
       throw e;
+    }
+  }
+
+  static Future<ResponseSearchSuccess?> getSearchMovies(String query) async{
+    Uri url = Uri.https(ApiConstants.baseUrl,ApiConstants.searchApi,
+        {'api_key': ApiConstants.apiKey,'query':query});
+    try {
+      var response = await http.get(url);
+      var responseBody = response.body;
+      var json = jsonDecode(responseBody);
+      return ResponseSearchSuccess.fromJson(json);
+    }catch(e){
+      throw e ;
     }
   }
 }
