@@ -1,10 +1,12 @@
 import 'package:app_movies/app_colors.dart';
-import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
+
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
+import 'package:app_movies/watchlist/FireBase/favorite_func.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class NewReleasesWidget extends StatelessWidget {
-  final Results results;
+  final BaseResults results;
   NewReleasesWidget({required this.results});
   @override
   Widget build(BuildContext context) {
@@ -26,20 +28,9 @@ class NewReleasesWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 5, left: 3),
-              child: Icon(
-                Icons.bookmark,
-                color: AppColors.iconBookMarkColor,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.add,
-                color: AppColors.whiteColor,
-                size: 12,
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 3),
+              child:  FavoriteFunc(results: results)
             )
           ],
         )
