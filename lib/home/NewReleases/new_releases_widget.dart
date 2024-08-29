@@ -25,7 +25,7 @@ class NewReleasesWidget extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => DetailsScreen(
-                                  results: results,
+                                  moviesId: results.id,
                                 )));
                   },
                   child: CachedNetworkImage(
