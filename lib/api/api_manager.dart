@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_movies/api/api_constants.dart';
+import 'package:app_movies/model/ResponseBrowseDetails.dart';
 import 'package:app_movies/model/ResponseDetailsSuccess.dart';
 import 'package:app_movies/model/ResponsePopularSuccess.dart';
 import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
@@ -71,4 +72,17 @@ class ApiManager {
       throw e;
     }
   }
+
+  static Future<ResponseBrowseDetails?> getGenresList(int genre_id) async{
+    Uri url = Uri.https(ApiConstants.baseUrl , ApiConstants.BrowseApi,{'api_key': ApiConstants.apiKey});
+    try {
+      var response = await http.get(url);
+      return ResponseBrowseDetails.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      throw e;
+    }
+
+
+  }
+
 }
