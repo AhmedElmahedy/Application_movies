@@ -1,3 +1,5 @@
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
+
 class ResponseUpcomingSuccess {
   ResponseUpcomingSuccess({
     this.dates,
@@ -50,7 +52,8 @@ class ResponseUpcomingSuccess {
   }
 }
 
-class Results {
+class Results  extends BaseResults{
+
   Results({
     this.adult,
     this.backdropPath,
