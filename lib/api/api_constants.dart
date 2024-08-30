@@ -19,6 +19,12 @@ class ApiConstants {
 
   /// Api Similar => more like this section.
   static const String similarApi = '/3/movie/{movie_id}/similar';
+
   static const String BrowseApi = '/3/genre/movie/list';
   static const String GenresDetailsApi = '/3/discover/movie';
+
+
+  /// Api Search Movies
+  static const String searchApi = '/3/search/movie';
+
 }

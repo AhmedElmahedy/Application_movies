@@ -6,6 +6,7 @@ import 'package:app_movies/model/ResponseDetailsSuccess.dart';
 import 'package:app_movies/model/ResponsePopularSuccess.dart';
 import 'package:app_movies/model/ResponsePressedGenre.dart';
 import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
+import 'package:app_movies/model/ResponseSearchSuccess.dart';
 import 'package:app_movies/model/ResponseSimilarMovies.dart';
 import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +75,7 @@ class ApiManager {
     }
   }
 
+
   static Future<ResponseBrowseDetails?> getGenresList(String genre_id) async{
     Uri url = Uri.https(ApiConstants.baseUrl , ApiConstants.BrowseApi, {'api_key': ApiConstants.apiKey,
     'id':genre_id });
@@ -105,6 +107,21 @@ class ApiManager {
     } catch (e) {
       print('Error fetching movies: $e');
       return null;
+
+  /// https://api.themoviedb.org/3/search/movie
+  static Future<ResponseSearchSuccess?> getSearchMovies(String query) async{
+    Uri url = Uri.https(ApiConstants.baseUrl,ApiConstants.searchApi, {
+      'api_key': ApiConstants.apiKey,
+          'query':query
+    });
+    try {
+      var response = await http.get(url);
+      var responseBody = response.body;
+      var json = jsonDecode(responseBody);
+      return ResponseSearchSuccess.fromJson(json);
+    }catch(e){
+      throw e ;
+
     }
   }
 }

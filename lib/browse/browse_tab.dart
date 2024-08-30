@@ -15,6 +15,7 @@ class _BrowseTabState extends State<BrowseTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
             title: Text("Browse Category",
                 style: Theme.of(context).textTheme.titleMedium),
@@ -31,5 +32,9 @@ class _BrowseTabState extends State<BrowseTab> {
   void onCategoryitemClicked(Category newcategory) {
     selectedcategory = newcategory;
     setState(() {});
+
+
+    );
+
   }
 }

@@ -17,6 +17,8 @@ class DetailsTopScreen extends StatelessWidget {
           imageUrl: details.backdropPath != null
               ? "$baseUrl${details.backdropPath}"
               : '',
+          height: MediaQuery.of(context).size.height * 0.23,
+          fit: BoxFit.fill,
           placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(color: AppColors.yellowColor)),
           errorWidget: (context, url, error) => const Center(
@@ -34,7 +36,7 @@ class DetailsTopScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: Text(details.releaseDate ?? '',
+          child: Text(details.releaseDate ?? '' ,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
@@ -107,7 +109,7 @@ class DetailsTopScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "${details.releaseDate}",
+                              "${details.voteAverage}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall

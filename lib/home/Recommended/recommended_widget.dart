@@ -1,4 +1,5 @@
 import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/home/details/details_screen.dart';
 import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +18,23 @@ class RecommendedWidget extends StatelessWidget {
             /// Image
             Padding(
                 padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                child: CachedNetworkImage(
-                  imageUrl: results.posterPath != null
-                      ? "$baseUrl${results.posterPath}"
-                      : '',
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      const Center(child: Icon(Icons.error)),
-                  fit: BoxFit.fill,
-                  height: MediaQuery.of(context).size.height * 0.15,
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(
+                        builder:(context) =>DetailsScreen(moviesId: results.id)
+                    ));
+                  },
+                  child: CachedNetworkImage(
+                    imageUrl: results.posterPath != null
+                        ? "$baseUrl${results.posterPath}"
+                        : '',
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        const Center(child: Icon(Icons.error)),
+                    fit: BoxFit.fill,
+                    height: MediaQuery.of(context).size.height * 0.15,
+                  ),
                 )),
 
             /// Icon Book mark

@@ -9,6 +9,11 @@ class MyThemeData {
             fontSize: 14,
             fontWeight: FontWeight.w500,
             color: AppColors.whiteColor),
+        titleMedium: TextStyle(  fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: AppColors.whiteColor)
 
-      ));
+      )
+
+  );
 }

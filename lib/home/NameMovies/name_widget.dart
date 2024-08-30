@@ -1,4 +1,5 @@
 import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/home/details/details_screen.dart';
 import 'package:app_movies/model/ResponsePopularSuccess.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -38,19 +39,25 @@ class NameWidget extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: CachedNetworkImage(
-            imageUrl: results.posterPath != null
-                ? "$baseUrl${results.posterPath}"
-                : '',
-            placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(
-              color: AppColors.yellowColor,
-            )),
-            errorWidget: (context, url, error) => const Center(
-                child: Icon(
-              Icons.error,
-              color: AppColors.yellowColor,
-            )),
+          child: GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => DetailsScreen(moviesId: results.id)));
+            },
+            child: CachedNetworkImage(
+              imageUrl: results.posterPath != null
+                  ? "$baseUrl${results.posterPath}"
+                  : '',
+              placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                color: AppColors.yellowColor,
+              )),
+              errorWidget: (context, url, error) => const Center(
+                  child: Icon(
+                Icons.error,
+                color: AppColors.yellowColor,
+              )),
+            ),
           ),
         ),
       ),

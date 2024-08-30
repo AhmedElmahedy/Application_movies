@@ -1,47 +1,38 @@
-import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
-
-class ResponseUpcomingSuccess {
-  ResponseUpcomingSuccess({
-    this.dates,
-    this.success,
+class ResponseSearchSuccess {
+  ResponseSearchSuccess({
+      this.page, 
+      this.results, 
+      this.totalPages, 
+      this.totalResults,
     this.statusCode,
     this.statusMessage,
-    this.page,
-    this.results,
-    this.totalPages,
-    this.totalResults,
-  });
+    this.success
+    });
 
-  ResponseUpcomingSuccess.fromJson(dynamic json) {
-    dates = json['dates'] != null ? Dates.fromJson(json['dates']) : null;
+  ResponseSearchSuccess.fromJson(dynamic json) {
     page = json['page'];
-    success = json['success'];
     statusCode = json['status_code'];
     statusMessage = json['status_message'];
+    success = json['success'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(Search.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
-  Dates? dates;
-  bool? success;
-  int? statusCode;
-  String? statusMessage;
   int? page;
-  List<Results>? results;
+  List<Search>? results;
   int? totalPages;
   int? totalResults;
+  int? statusCode;
+  String? statusMessage;
+  bool? success;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if (dates != null) {
-      map['dates'] = dates?.toJson();
-    }
     map['page'] = page;
     if (results != null) {
       map['results'] = results?.map((v) => v.toJson()).toList();
@@ -50,28 +41,27 @@ class ResponseUpcomingSuccess {
     map['total_results'] = totalResults;
     return map;
   }
+
 }
 
-class Results  extends BaseResults{
+class Search {
+  Search({
+      this.adult, 
+      this.backdropPath, 
+      this.genreIds, 
+      this.id, 
+      this.originalLanguage, 
+      this.originalTitle, 
+      this.overview, 
+      this.popularity, 
+      this.posterPath, 
+      this.releaseDate, 
+      this.title, 
+      this.video, 
+      this.voteAverage, 
+      this.voteCount,});
 
-  Results({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
-  });
-
-  Results.fromJson(dynamic json) {
+  Search.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
@@ -87,7 +77,6 @@ class Results  extends BaseResults{
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -121,26 +110,5 @@ class Results  extends BaseResults{
     map['vote_count'] = voteCount;
     return map;
   }
-}
 
-class Dates {
-  Dates({
-    this.maximum,
-    this.minimum,
-  });
-
-  Dates.fromJson(dynamic json) {
-    maximum = json['maximum'];
-    minimum = json['minimum'];
-  }
-
-  String? maximum;
-  String? minimum;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['maximum'] = maximum;
-    map['minimum'] = minimum;
-    return map;
-  }
 }
