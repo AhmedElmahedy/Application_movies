@@ -6,15 +6,14 @@ import 'package:flutter/material.dart';
 class ItemsNameMovies extends StatelessWidget {
   List<Results> resultsList;
 
-  ItemsNameMovies({ required this.resultsList});
+  ItemsNameMovies({super.key, required this.resultsList});
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-        items: resultsList.map((result)=> NameWidget(results: result)).toList(),
+        items:
+            resultsList.map((result) => NameWidget(results: result)).toList(),
         options: CarouselOptions(
-          viewportFraction: 1,
-          autoPlay: true,
-          height: double.infinity
-        ));
+            viewportFraction: 1, autoPlay: true, height: double.infinity));
   }
 }

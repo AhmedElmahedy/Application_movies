@@ -1,60 +1,110 @@
 import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/model/ResponseSimilarMovies.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MoreLikeThis extends StatelessWidget {
-  const MoreLikeThis({super.key});
+  final Similar similar;
+  const MoreLikeThis({super.key, required this.similar});
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    String baseUrl = 'https://image.tmdb.org/t/p/w500';
+    return Column(
       children: [
         Stack(
           children: [
             /// Image
             Padding(
-              padding: const EdgeInsets.only(top:8 ,left:8 ,right: 8),
-              child: Image.asset('assets/images/Image.png',
-                height: MediaQuery.of(context).size.height *0.15,),
+              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+              child: CachedNetworkImage(
+                imageUrl: similar.posterPath != null
+                    ? "$baseUrl${similar.posterPath}"
+                    : '',
+                width: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.of(context).size.height * 0.15,
+                fit: BoxFit.fill,
+                placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(
+                  color: AppColors.yellowColor,
+                )),
+                errorWidget: (context, url, error) => const Center(
+                    child: Icon(
+                  Icons.error,
+                  color: AppColors.yellowColor,
+                )),
+              ),
             ),
+
             /// Icon Book mark
             const Padding(
-              padding: EdgeInsets.only(
-                  top: 5,left: 3
+              padding: EdgeInsets.only(top: 5, left: 3),
+              child: Icon(
+                Icons.bookmark,
+                color: AppColors.iconBookMarkColor,
               ),
-              child: Icon(Icons.bookmark,
-                color: AppColors.iconBookMarkColor,),
             ),
+
             /// Icon add
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.add,
+              child: Icon(
+                Icons.add,
                 color: AppColors.whiteColor,
-                size: 12,),
+                size: 12,
+              ),
             )
           ],
         ),
         Container(
-          decoration: BoxDecoration(
-              color: AppColors.iconBookMarkColor,
-              borderRadius: BorderRadius.circular(4)),
-          height: MediaQuery.of(context).size.height *0.1,
-          width: MediaQuery.of(context).size.width *0.21,
+          color: AppColors.iconBookMarkColor,
+          height: MediaQuery.of(context).size.height * 0.1,
+          width: MediaQuery.of(context).size.width * 0.213,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text("7.7",
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontSize: 10
-                  ),),
-                Text("Deadpool 2",style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontSize: 10
-                ),),
-                Text("2018  R  1h 59m",style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontSize: 8
-                ),),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star_rate_rounded,
+                        color: AppColors.yellowColor,
+                        size: 15,
+                      ),
+                      Text(
+                        "${similar.voteAverage ?? ''}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(fontSize: 10),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.009,
+                  ),
+                  Text(
+                    similar.title ??
+                        '                                                                                 ',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontSize: 10),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.009,
+                  ),
+                  Text(
+                    similar.releaseDate ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontSize: 8, color: AppColors.nobelColor),
+                  ),
+                ],
+              ),
             ),
           ),
         )

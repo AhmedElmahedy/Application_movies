@@ -1,36 +1,35 @@
-class ResponseRecommendedSuccess {
-  ResponseRecommendedSuccess({
-    this.page,
+class ResponseSearchSuccess {
+  ResponseSearchSuccess({
+      this.page, 
+      this.results, 
+      this.totalPages, 
+      this.totalResults,
     this.statusCode,
-    this.success,
     this.statusMessage,
-    this.results,
-    this.totalPages,
-    this.totalResults,
-  });
+    this.success
+    });
 
-  ResponseRecommendedSuccess.fromJson(dynamic json) {
+  ResponseSearchSuccess.fromJson(dynamic json) {
     page = json['page'];
     statusCode = json['status_code'];
-    success = json['success'];
     statusMessage = json['status_message'];
+    success = json['success'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(Search.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
   int? page;
-  int? statusCode;
-  bool? success;
-  String? statusMessage;
-  List<Results>? results;
+  List<Search>? results;
   int? totalPages;
   int? totalResults;
+  int? statusCode;
+  String? statusMessage;
+  bool? success;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -42,27 +41,27 @@ class ResponseRecommendedSuccess {
     map['total_results'] = totalResults;
     return map;
   }
+
 }
 
-class Results {
-  Results({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
-  });
+class Search {
+  Search({
+      this.adult, 
+      this.backdropPath, 
+      this.genreIds, 
+      this.id, 
+      this.originalLanguage, 
+      this.originalTitle, 
+      this.overview, 
+      this.popularity, 
+      this.posterPath, 
+      this.releaseDate, 
+      this.title, 
+      this.video, 
+      this.voteAverage, 
+      this.voteCount,});
 
-  Results.fromJson(dynamic json) {
+  Search.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];
@@ -78,7 +77,6 @@ class Results {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -112,4 +110,5 @@ class Results {
     map['vote_count'] = voteCount;
     return map;
   }
+
 }

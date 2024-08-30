@@ -13,5 +13,7 @@ class MyThemeData {
             fontWeight: FontWeight.bold,
             color: AppColors.whiteColor)
 
-      ));
+      )
+
+  );
 }
