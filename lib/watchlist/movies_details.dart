@@ -56,10 +56,7 @@ class MoviesDetails extends StatelessWidget {
                 style: TextStyle(color: Colors.white54),
               ),
               SizedBox(height: 10),
-              Text(
-                "Film Actors",
-                style: TextStyle(color: Colors.white54),
-              ),
+
             ],
           ),
         ],

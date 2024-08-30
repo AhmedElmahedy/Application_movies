@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class CategoryFragment extends StatelessWidget {
 var categoriesList= Category.getcategories();
+
 Function onCategoryitemClicked;
 CategoryFragment({required this.onCategoryitemClicked});
 

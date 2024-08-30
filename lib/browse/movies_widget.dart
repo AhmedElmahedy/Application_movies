@@ -1,0 +1,267 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/model/ResponsePressedGenre.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+
+class MoviesWidget extends StatelessWidget {
+  final GenresResults results;
+  const MoviesWidget({super.key, required this.results});
+
+  @override
+  Widget build(BuildContext context) {
+    String baseUrl = 'https://image.tmdb.org/t/p/w500';
+    return Column(
+      children: [
+        Stack(
+          children: [
+            /// Image
+            Padding(
+                padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                child: CachedNetworkImage(
+                  imageUrl: results.posterPath != null
+                      ? "$baseUrl${results.posterPath}"
+                      : '',
+                  placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                  const Center(child: Icon(Icons.error)),
+                  fit: BoxFit.fill,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                )),
+
+            /// Icon Book mark
+            const Padding(
+              padding: EdgeInsets.only(top: 5, left: 3),
+              child: Icon(
+                Icons.bookmark,
+                color: AppColors.iconBookMarkColor,
+              ),
+            ),
+
+            /// Icon add
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.add,
+                color: AppColors.whiteColor,
+                size: 12,
+              ),
+            )
+          ],
+        ),
+        Container(
+          decoration: BoxDecoration(
+              color: AppColors.iconBookMarkColor,
+              borderRadius: BorderRadius.circular(0)),
+          height: MediaQuery.of(context).size.height * 0.12,
+          width: MediaQuery.of(context).size.width * 0.20,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: AppColors.yellowColor,
+                        size: 10,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        results.voteAverage?.toStringAsFixed(1) ?? '',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(fontSize: 10),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    results.title ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontSize: 10),
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    results.releaseDate ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontSize: 8, color: AppColors.nobelColor),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'package:app_movies/app_colors.dart';
+// import 'package:app_movies/model/ResponsePressedGenre.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:flutter/material.dart';
+//
+// class MoviesWidget extends StatelessWidget {
+//   final GenresResults results;
+//   const MoviesWidget({super.key, required this.results});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     String baseUrl = 'https://image.tmdb.org/t/p/w500';
+//     return Column(
+//       children: [
+//         Stack(
+//           children: [
+//             /// Image
+//             Padding(
+//                 padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+//                 child: CachedNetworkImage(
+//                   imageUrl: results.posterPath != null
+//                       ? "$baseUrl${results.posterPath}"
+//                       : '',
+//                   placeholder: (context, url) =>
+//                   const Center(child: CircularProgressIndicator()),
+//                   errorWidget: (context, url, error) =>
+//                   const Center(child: Icon(Icons.error)),
+//                   fit: BoxFit.fill,
+//                   height: MediaQuery.of(context).size.height * 0.15,
+//                 )),
+//
+//             /// Icon Book mark
+//             const Padding(
+//               padding: EdgeInsets.only(top: 5, left: 3),
+//               child: Icon(
+//                 Icons.bookmark,
+//                 color: AppColors.iconBookMarkColor,
+//               ),
+//             ),
+//
+//             /// Icon add
+//             const Padding(
+//               padding: EdgeInsets.all(8.0),
+//               child: Icon(
+//                 Icons.add,
+//                 color: AppColors.whiteColor,
+//                 size: 12,
+//               ),
+//             )
+//           ],
+//         ),
+//         Container(
+//           decoration: BoxDecoration(
+//               color: AppColors.iconBookMarkColor,
+//               borderRadius: BorderRadius.circular(0)),
+//           height: MediaQuery.of(context).size.height * 0.12,
+//           width: MediaQuery.of(context).size.width * 0.20,
+//           child: Padding(
+//             padding: const EdgeInsets.all(4.0),
+//             child: SingleChildScrollView(
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.stretch,
+//                 children: [
+//                   Row(
+//                     children: [
+//                       const Icon(
+//                         Icons.star,
+//                         color: AppColors.yellowColor,
+//                         size: 10,
+//                       ),
+//                       const SizedBox(
+//                         width: 4,
+//                       ),
+//                       // Text(
+//                       //   results.releaseDate != null
+//                       //       ? results.releaseDate!.toStringAsFixed(1)
+//                       //       : '',
+//                       //   style: Theme.of(context)
+//                       //       .textTheme
+//                       //       .titleSmall
+//                       //       ?.copyWith(fontSize: 10),
+//                       // ),
+//                     ],
+//                   ),
+//                   const SizedBox(
+//                     height: 4,
+//                   ),
+//                   Text(
+//                     results.title ?? '',
+//                     style: Theme.of(context)
+//                         .textTheme
+//                         .titleSmall
+//                         ?.copyWith(fontSize: 10),
+//                   ),
+//                   const SizedBox(
+//                     height: 4,
+//                   ),
+//                   Text(
+//                     results.releaseDate ?? '',
+//                     style: Theme.of(context)
+//                         .textTheme
+//                         .titleSmall
+//                         ?.copyWith(fontSize: 8, color: AppColors.nobelColor),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }

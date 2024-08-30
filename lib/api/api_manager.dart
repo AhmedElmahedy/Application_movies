@@ -4,6 +4,7 @@ import 'package:app_movies/api/api_constants.dart';
 import 'package:app_movies/model/ResponseBrowseDetails.dart';
 import 'package:app_movies/model/ResponseDetailsSuccess.dart';
 import 'package:app_movies/model/ResponsePopularSuccess.dart';
+import 'package:app_movies/model/ResponsePressedGenre.dart';
 import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
 import 'package:app_movies/model/ResponseSimilarMovies.dart';
 import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
@@ -73,8 +74,9 @@ class ApiManager {
     }
   }
 
-  static Future<ResponseBrowseDetails?> getGenresList(int genre_id) async{
-    Uri url = Uri.https(ApiConstants.baseUrl , ApiConstants.BrowseApi,{'api_key': ApiConstants.apiKey});
+  static Future<ResponseBrowseDetails?> getGenresList(String genre_id) async{
+    Uri url = Uri.https(ApiConstants.baseUrl , ApiConstants.BrowseApi, {'api_key': ApiConstants.apiKey,
+    'id':genre_id });
     try {
       var response = await http.get(url);
       return ResponseBrowseDetails.fromJson(jsonDecode(response.body));
@@ -85,4 +87,30 @@ class ApiManager {
 
   }
 
+  static Future<ResponsePressedGenre?> getGenresDetails(String genreId) async{
+    Uri url = Uri.https(ApiConstants.baseUrl , ApiConstants.GenresDetailsApi,{'api_key': ApiConstants.apiKey , 'with_genres':genreId});
+
+
+    try {
+      var response = await http.get(url);
+      print(response.body);
+      if (response.statusCode == 200) {
+        return ResponsePressedGenre.fromJson(jsonDecode(response.body));
+
+      } else {
+        // Handle non-200 responses
+        print('Failed to load movies: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching movies: $e');
+      return null;
+    }
+  }
 }
+
+
+
+
+
+

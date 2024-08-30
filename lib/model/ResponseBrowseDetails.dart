@@ -1,64 +1,52 @@
-/// genres : [{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]
-
 class ResponseBrowseDetails {
   ResponseBrowseDetails({
-      List<Browse>? genres,}){
-    _genres = genres;
-}
+      this.genres,
+  this.status_message,
+  this.success,
+  this.status_code});
 
   ResponseBrowseDetails.fromJson(dynamic json) {
+    success = json['success'];
+    status_code = json['status_code'];
+    status_message = json['status_message'];
     if (json['genres'] != null) {
-      _genres = [];
+      genres = [];
       json['genres'].forEach((v) {
-        _genres?.add(Browse.fromJson(v));
+        genres?.add(Genres.fromJson(v));
       });
     }
   }
-  List<Browse>? _genres;
-ResponseBrowseDetails copyWith({  List<Browse>? genres,
-}) => ResponseBrowseDetails(  genres: genres ?? _genres,
-);
-  List<Browse>? get genres => _genres;
+  int? status_code;
+  String? status_message;
+  bool? success;
+  List<Genres>? genres;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if (_genres != null) {
-      map['genres'] = _genres?.map((v) => v.toJson()).toList();
+    if (genres != null) {
+      map['genres'] = genres?.map((v) => v.toJson()).toList();
     }
     return map;
   }
 
 }
 
-/// id : 28
-/// name : "Action"
+class Genres {
+  Genres({
+      this.id, 
+      this.name,});
 
-class Browse {
-  Browse({
-      num? id, 
-      String? name,}){
-    _id = id;
-    _name = name;
-}
-
-  Browse.fromJson(dynamic json) {
-    _id = json['id'];
-    _name = json['name'];
+  Genres.fromJson(dynamic json) {
+    id = json['id'];
+    name = json['name'];
   }
-  num? _id;
-  String? _name;
-Browse copyWith({  num? id,
-  String? name,
-}) => Browse(  id: id ?? _id,
-  name: name ?? _name,
-);
-  num? get id => _id;
-  String? get name => _name;
+  int? id;
+  String? name;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
+    map['id'] = id;
+    map['name'] = name;
     return map;
   }
 
