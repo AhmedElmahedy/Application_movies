@@ -6,27 +6,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class SearchTab extends StatefulWidget {
+  const SearchTab({super.key});
+
   @override
   State<SearchTab> createState() => _SearchTabState();
 }
-
 class _SearchTabState extends State<SearchTab> {
   Future<ResponseSearchSuccess?>? movies;
   TextEditingController controller = TextEditingController();
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   controller.addListener(() {
-  //     setState(() {});
-  //   });
-  // }
 
   void searchMovies(String query) {
     setState(() {
       movies = ApiManager.getSearchMovies(query);
     });
   }
-
   @override
   Widget build(BuildContext context) {
     String baseUrl = 'https://image.tmdb.org/t/p/w500';

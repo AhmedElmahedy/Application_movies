@@ -1,6 +1,6 @@
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
 
 class FavoriteFunc extends StatefulWidget {
   final BaseResults results;
@@ -37,7 +37,8 @@ class _FavoriteFuncState extends State<FavoriteFunc> {
 
       await FirebaseFirestore.instance
           .collection('favorites')
-          .doc(widget.results.id.toString()) // Assuming 'id' is the unique identifier
+          .doc(widget.results.id
+              .toString()) // Assuming 'id' is the unique identifier
           .set(movieData);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Added to favorites!')),

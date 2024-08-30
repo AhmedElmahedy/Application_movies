@@ -8,7 +8,7 @@ class FireStoreService {
       fromFirestore: (snapshot, options) => Movie.fromMap(snapshot.data()!),
       toFirestore: (movie, options) => movie.toMap());
 
-  // Fetch all favorite movies from Firestore
+  /// Fetch all favorite movies from Firestore
   Future<List<Movie>> fetchFavorites() async {
     try{
     QuerySnapshot<Movie> snapshot = await _moviesCollection.get();
@@ -20,7 +20,7 @@ class FireStoreService {
     }
   }
 
-  // Add a movie to the favorites collection in Firestore
+  /// Add a movie to the favorites collection in Firestore
   Future<void> addFavorite(Movie movie) async {
     try {
       await _moviesCollection.doc(movie.id.toString()).set(movie,SetOptions(merge: true));
@@ -29,17 +29,13 @@ class FireStoreService {
     }
     }
 
-  // Remove a movie from the favorites collection in Firestore
+  /// Remove a movie from the favorites collection in Firestore
   Future<void> removeFromFavorites(String movieId) async {
     try{
     await _moviesCollection.doc(movieId).delete();
   }catch(e){
       print('Error removing favorite : $e');
     }
-  }
-
-  static CollectionReference<Movie> getfav() {
-    return _moviesCollection;
   }
 }
 

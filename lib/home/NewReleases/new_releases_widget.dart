@@ -1,22 +1,13 @@
 import 'package:app_movies/app_colors.dart';
-
-
-import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
-import 'package:app_movies/watchlist/FireBase/favorite_func.dart';
 import 'package:app_movies/home/details/details_screen.dart';
 import 'package:app_movies/model/ResponseUpcomingSuccess.dart';
-
+import 'package:app_movies/watchlist/FireBase/favorite_func.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class NewReleasesWidget extends StatelessWidget {
-
-  final BaseResults results;
-  NewReleasesWidget({required this.results});
-
-  const NewReleasesWidget({super.key, required this.results});
   final Results results;
-
+  const NewReleasesWidget({super.key, required this.results});
   @override
   Widget build(BuildContext context) {
     String baseUrl = 'https://image.tmdb.org/t/p/w500';
@@ -55,9 +46,8 @@ class NewReleasesWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5, left: 3),
-              child:  FavoriteFunc(results: results)
-            )
+                padding: const EdgeInsets.only(top: 5, left: 3),
+                child: FavoriteFunc(results: results))
           ],
         )
       ],

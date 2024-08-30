@@ -1,12 +1,11 @@
-import 'package:app_movies/watchlist/watchlist_provider.dart';
 import 'package:app_movies/watchlist/movies_details.dart';
+import 'package:app_movies/watchlist/watchlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../app_colors.dart';
 import '../model/movies_response.dart';
 import 'FireBase/firebase_Service.dart';
-
-
 
 class WatchListTab extends StatefulWidget {
   @override
@@ -22,26 +21,10 @@ class _WatchListTabState extends State<WatchListTab> {
     getFavorites();
   }
 
-
-// old
-//   Future<void> getFetchFavorites() async {
-//     final favoriteMovies = await _firestoreService.fetchFavorites();
-//     setState(() {
-//       moviesList = favoriteMovies;
-//     });
-//   }
-
-
-
-// amira style
   Future<void> getFavorites() async {
     moviesList = (await _firestoreService.fetchFavorites());
-    print('${moviesList}---------------------------------------------------');
-    setState(() {
-    });
+    setState(() {});
   }
-
-
 
   @override
   @override
@@ -60,12 +43,12 @@ class _WatchListTabState extends State<WatchListTab> {
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
-                final movie =moviesList[index];
+                final movie = moviesList[index];
                 return MoviesDetails(
                   movie: movie,
-                    );
+                );
               },
-              itemCount:moviesList.length,
+              itemCount: moviesList.length,
             ),
           )
         ],

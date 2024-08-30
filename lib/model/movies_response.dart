@@ -1,13 +1,13 @@
 class Movie {
- late int id;
- late  String title;
- late String overview;
- late String posterPath;
- late String releaseDate;
+  int? id;
+ String? title;
+ String? overview;
+ String? posterPath;
+ String? releaseDate;
   // Add other relevant fields here
 
   Movie({
-     this.id = 0 ,
+     this.id  ,
     required this.title,
     required this.overview,
     required this.posterPath,
@@ -18,11 +18,11 @@ class Movie {
   // Factory constructor to create a Movie object from a map (e.g., Firestore data)
  /// json => object
    Movie.fromMap(Map<String, dynamic> data) {
-      id = data['id'] as int?  ?? 0 ;
-      title = data['title'] as String?  ?? 'mahedy';
-      overview = data['overview'] as String? ?? 'Ezz' ;
-      posterPath = data['poster_path'] as String?  ?? 'fuiohdio';
-      releaseDate= data['releaseDate'] as String? ?? 'dfdv';
+      id = data['id'];
+      title = data['title'];
+      overview = data['overview']  ;
+      posterPath = data['poster_path'] ;
+      releaseDate= data['releaseDate'] ;
       // Initialize other fields from the map
   }
 
