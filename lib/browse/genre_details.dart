@@ -22,10 +22,10 @@ class _GenreDetailsState extends State<GenreDetails> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ResponsePressedGenre?>(
-      future: ApiManager.getGenresDetails('${widget.category.id}'),
+      future: ApiManager.getGenresDetails(widget.category.id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: AppColors.yellowColor,
             ),
@@ -63,24 +63,21 @@ class _GenreDetailsState extends State<GenreDetails> {
         return Scaffold(
           backgroundColor: AppColors.background,
           appBar: AppBar(
-            iconTheme: IconThemeData(color: AppColors.whiteColor,size: 30,),
-
+            iconTheme: const IconThemeData(color: AppColors.whiteColor,size: 30,),
             backgroundColor: AppColors.background,
             centerTitle: true,
             title: Text(
-              "${widget.category.title}",
+              widget.category.title,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!
-                  .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
+                  .copyWith(fontSize: 18, fontWeight: FontWeight.w700),
             ),
           ),
           body: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 10.0,
-                crossAxisSpacing: 10.0,
-                childAspectRatio: 0.6),
+                childAspectRatio: 0.62),
             itemBuilder: (context, index) {
               return MoviesWidget(results: genresList[index]);
             },

@@ -1,10 +1,7 @@
+import 'package:app_movies/app_colors.dart';
+import 'package:app_movies/model/movies_response.dart';
 import 'package:app_movies/watchlist/movies_details.dart';
-import 'package:app_movies/watchlist/watchlist_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../app_colors.dart';
-import '../model/movies_response.dart';
 import 'FireBase/firebase_Service.dart';
 
 class WatchListTab extends StatefulWidget {
@@ -22,20 +19,22 @@ class _WatchListTabState extends State<WatchListTab> {
   }
 
   Future<void> getFavorites() async {
-    moviesList = (await _firestoreService.fetchFavorites());
+    moviesList = await _firestoreService.fetchFavorites();
     setState(() {});
   }
 
   @override
   @override
   Widget build(BuildContext context) {
-    var watchlistProvider = Provider.of<WatchListProvider>(context);
+    // var watchlistProvider = Provider.of<WatchListProvider>(context);
 
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       appBar: AppBar(
         title:
-            Text("WatchList", style: Theme.of(context).textTheme.titleMedium),
+            Text("WatchList", style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontSize: 22
+            )),
         backgroundColor: AppColors.blackColor,
       ),
       body: Column(

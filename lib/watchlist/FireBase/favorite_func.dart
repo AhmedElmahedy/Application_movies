@@ -71,7 +71,7 @@ class _FavoriteFuncState extends State<FavoriteFunc> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(size: 30,
+      icon: Icon(size: 35,
         isFavorite ? Icons.favorite : Icons.favorite_border,
         color: isFavorite ? Colors.red: AppColors.greyColor,
       ),

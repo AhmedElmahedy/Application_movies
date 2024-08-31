@@ -17,7 +17,7 @@ class DetailsTopScreen extends StatelessWidget {
           imageUrl: details.backdropPath != null
               ? "$baseUrl${details.backdropPath}"
               : '',
-          height: MediaQuery.of(context).size.height * 0.23,
+          height: MediaQuery.of(context).size.height * 0.27,
           fit: BoxFit.fill,
           placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(color: AppColors.yellowColor)),
