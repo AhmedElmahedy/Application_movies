@@ -38,7 +38,7 @@ class CategoryItem extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .titleSmall!
-                .copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                .copyWith(fontSize: 20, fontWeight: FontWeight.bold,color: AppColors.whiteColor),
           ))
         ],
       ),

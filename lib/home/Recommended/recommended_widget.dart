@@ -4,6 +4,8 @@ import 'package:app_movies/model/ResponseRecommendedSuccess.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../watchlist/FireBase/favorite_func.dart';
+
 class RecommendedWidget extends StatelessWidget {
   final Results results;
   const RecommendedWidget({super.key, required this.results});
@@ -44,24 +46,9 @@ class RecommendedWidget extends StatelessWidget {
                   ),
                 )),
 
-            /// Icon Book mark
-            const Padding(
-              padding: EdgeInsets.only(top: 5, left: 3),
-              child: Icon(
-                Icons.bookmark,
-                color: AppColors.iconBookMarkColor,
-              ),
-            ),
-
-            /// Icon add
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.add,
-                color: AppColors.whiteColor,
-                size: 12,
-              ),
-            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 5, left: 3),
+                child: FavoriteFunc(results: results)),
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.158,
