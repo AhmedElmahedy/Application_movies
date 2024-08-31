@@ -1,3 +1,5 @@
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
+
 class ResponseSimilarMovies {
   ResponseSimilarMovies({
       this.page,
@@ -43,7 +45,7 @@ class ResponseSimilarMovies {
 
 }
 
-class Similar {
+class Similar extends BaseResults {
   Similar({
       this.adult, 
       this.backdropPath, 

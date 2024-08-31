@@ -45,7 +45,7 @@ class _WatchListTabState extends State<WatchListTab> {
               itemBuilder: (context, index) {
                 final movie = moviesList[index];
                 return MoviesDetails(
-                  movie: movie,
+                  movie: movie
                 );
               },
               itemCount: moviesList.length,

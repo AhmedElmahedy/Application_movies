@@ -9,6 +9,7 @@ class AppColors {
   static const Color silverColor = Color(0xffC6C6C6) ;
   static const Color heavyMetalColor = Color(0xff282A28) ;
   static const Color iconBookMarkColor = Color(0xd8514f4f) ;
-  static const Color grayColor = Color(0xff707070) ;
+  static const Color greyColor = Color(0xff707070) ;
+
 
 }

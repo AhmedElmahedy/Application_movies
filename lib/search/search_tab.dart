@@ -50,7 +50,7 @@ class _SearchTabState extends State<SearchTab> {
                   hintStyle: Theme.of(context)
                       .textTheme
                       .titleSmall
-                      ?.copyWith(color: AppColors.grayColor),
+                      ?.copyWith(color: AppColors.greyColor),
                   prefixIcon: const Icon(
                     Icons.search,
                     color: AppColors.whiteColor,
@@ -94,7 +94,7 @@ class _SearchTabState extends State<SearchTab> {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall
-                                ?.copyWith(color: AppColors.grayColor))
+                                ?.copyWith(color: AppColors.greyColor))
                       ],
                     );
                   }
@@ -163,7 +163,7 @@ class _SearchTabState extends State<SearchTab> {
                                             .titleSmall
                                             ?.copyWith(
                                                 fontSize: 16,
-                                                color: AppColors.grayColor),
+                                                color: AppColors.greyColor),
                                       ),
                                     ],
                                   ),

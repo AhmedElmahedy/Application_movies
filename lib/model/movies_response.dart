@@ -1,4 +1,6 @@
-class Movie {
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
+
+class Movie  {
   int? id;
  String? title;
  String? overview;

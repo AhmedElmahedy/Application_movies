@@ -1,3 +1,5 @@
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
+
 class ResponsePressedGenre {
   ResponsePressedGenre({
     this.status_message,
@@ -44,7 +46,7 @@ class ResponsePressedGenre {
 
 }
 
-class GenresResults {
+class GenresResults extends BaseResults{
   GenresResults({
       this.adult, 
       this.backdropPath, 

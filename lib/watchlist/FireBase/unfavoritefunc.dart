@@ -1,18 +1,17 @@
+
 import 'package:app_movies/app_colors.dart';
 import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-class FavoriteFunc extends StatefulWidget {
+class Unfavoritefunc extends StatefulWidget {
   final BaseResults results;
-
-  const FavoriteFunc({required this.results});
+  const Unfavoritefunc({required this.results});
 
   @override
-  State<FavoriteFunc> createState() => _FavoriteFuncState();
+  State<Unfavoritefunc> createState() => _UnfavoritefuncState();
 }
 
-class _FavoriteFuncState extends State<FavoriteFunc> {
+class _UnfavoritefuncState extends State<Unfavoritefunc> {
   bool isFavorite = false;
 
   void _toggleFavorite() {
@@ -39,7 +38,7 @@ class _FavoriteFuncState extends State<FavoriteFunc> {
       await FirebaseFirestore.instance
           .collection('favorites')
           .doc(widget.results.id
-              .toString()) // Assuming 'id' is the unique identifier
+          .toString()) // Assuming 'id' is the unique identifier
           .set(movieData);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Added to favorites!')),
@@ -73,10 +72,9 @@ class _FavoriteFuncState extends State<FavoriteFunc> {
     return IconButton(
       icon: Icon(size: 30,
         isFavorite ? Icons.favorite : Icons.favorite_border,
-        color: isFavorite ? Colors.red: AppColors.greyColor,
+        color: isFavorite ? AppColors.greyColor:Colors.red ,
       ),
       onPressed: _toggleFavorite,
     );
   }
 }
-

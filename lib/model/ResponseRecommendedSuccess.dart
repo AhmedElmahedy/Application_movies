@@ -1,3 +1,5 @@
+import 'package:app_movies/watchlist/FireBase/Results_error_Solution/results_abstract.dart';
+
 class ResponseRecommendedSuccess {
   ResponseRecommendedSuccess({
     this.page,
@@ -44,7 +46,7 @@ class ResponseRecommendedSuccess {
   }
 }
 
-class Results {
+class Results extends BaseResults {
   Results({
     this.adult,
     this.backdropPath,

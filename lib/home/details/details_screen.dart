@@ -57,7 +57,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           return Scaffold(
             backgroundColor: AppColors.blackColor,
             appBar: AppBar(
-              foregroundColor: AppColors.whiteColor,
+              iconTheme: IconThemeData(color: AppColors.whiteColor,size: 30,),
               backgroundColor: AppColors.background,
               centerTitle: true,
               title: Text(
