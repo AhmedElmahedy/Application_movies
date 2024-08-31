@@ -89,8 +89,9 @@ class ApiManager {
 
   }
 
-  static Future<ResponsePressedGenre?> getGenresDetails(String genreId) async{
-    Uri url = Uri.https(ApiConstants.baseUrl , ApiConstants.GenresDetailsApi,{'api_key': ApiConstants.apiKey , 'with_genres':genreId});
+  static Future<ResponsePressedGenre?> getGenresDetails(String genreId) async {
+    Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.GenresDetailsApi,
+        {'api_key': ApiConstants.apiKey, 'with_genres': genreId});
 
 
     try {
@@ -98,7 +99,6 @@ class ApiManager {
       print(response.body);
       if (response.statusCode == 200) {
         return ResponsePressedGenre.fromJson(jsonDecode(response.body));
-
       } else {
         // Handle non-200 responses
         print('Failed to load movies: ${response.statusCode}');
@@ -107,27 +107,22 @@ class ApiManager {
     } catch (e) {
       print('Error fetching movies: $e');
       return null;
-
-  /// https://api.themoviedb.org/3/search/movie
-  static Future<ResponseSearchSuccess?> getSearchMovies(String query) async{
-    Uri url = Uri.https(ApiConstants.baseUrl,ApiConstants.searchApi, {
-      'api_key': ApiConstants.apiKey,
-          'query':query
-    });
-    try {
-      var response = await http.get(url);
-      var responseBody = response.body;
-      var json = jsonDecode(responseBody);
-      return ResponseSearchSuccess.fromJson(json);
-    }catch(e){
-      throw e ;
-
     }
   }
-}
-
-
-
-
-
-
+      /// https://api.themoviedb.org/3/search/movie
+      static Future<ResponseSearchSuccess?> getSearchMovies(
+          String query) async {
+        Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.searchApi, {
+          'api_key': ApiConstants.apiKey,
+          'query': query
+        });
+        try {
+          var response = await http.get(url);
+          var responseBody = response.body;
+          var json = jsonDecode(responseBody);
+          return ResponseSearchSuccess.fromJson(json);
+        } catch (e) {
+          throw e;
+        }
+      }
+    }

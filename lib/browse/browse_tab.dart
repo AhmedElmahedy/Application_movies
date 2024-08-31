@@ -32,9 +32,5 @@ class _BrowseTabState extends State<BrowseTab> {
   void onCategoryitemClicked(Category newcategory) {
     selectedcategory = newcategory;
     setState(() {});
-
-
-    );
-
   }
-}
+  }

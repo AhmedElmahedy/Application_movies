@@ -31,7 +31,8 @@ class _SearchTabState extends State<SearchTab> {
                 top: MediaQuery.of(context).size.height * 0.05,
                 bottom: MediaQuery.of(context).size.height * 0.01,
                 right: MediaQuery.of(context).size.height * 0.02,
-                left: MediaQuery.of(context).size.height * 0.02),
+                left: MediaQuery.of(context).size.height * 0.02
+            ),
             child: TextField(
               controller: controller,
               style: Theme.of(context)

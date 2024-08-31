@@ -76,11 +76,7 @@ class MoviesDetails extends StatelessWidget {
                 "Release Date",
                 style: TextStyle(color: Colors.white54),
               ),
-              SizedBox(height: 10),
 
-                    .titleSmall
-                    ?.copyWith(color: AppColors.grayColor),
-              ),
 
             ],
           ),

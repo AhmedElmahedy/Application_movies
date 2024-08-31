@@ -17,22 +17,27 @@ class MoreLikeThis extends StatelessWidget {
             /// Image
             Padding(
               padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: CachedNetworkImage(
-                imageUrl: similar.posterPath != null
-                    ? "$baseUrl${similar.posterPath}"
-                    : '',
-                width: MediaQuery.of(context).size.height * 0.1,
-                height: MediaQuery.of(context).size.height * 0.15,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(
-                  color: AppColors.yellowColor,
-                )),
-                errorWidget: (context, url, error) => const Center(
-                    child: Icon(
-                  Icons.error,
-                  color: AppColors.yellowColor,
-                )),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(5),
+                    topLeft: Radius.circular(5)),
+                child: CachedNetworkImage(
+                  imageUrl: similar.posterPath != null
+                      ? "$baseUrl${similar.posterPath}"
+                      : '',
+                  width: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  fit: BoxFit.fill,
+                  placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                    color: AppColors.yellowColor,
+                  )),
+                  errorWidget: (context, url, error) => const Center(
+                      child: Icon(
+                    Icons.error,
+                    color: AppColors.yellowColor,
+                  )),
+                ),
               ),
             ),
 
@@ -53,61 +58,66 @@ class MoreLikeThis extends StatelessWidget {
                 color: AppColors.whiteColor,
                 size: 12,
               ),
-            )
-          ],
-        ),
-        Container(
-          color: AppColors.iconBookMarkColor,
-          height: MediaQuery.of(context).size.height * 0.1,
-          width: MediaQuery.of(context).size.width * 0.213,
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.158,
+                  left: MediaQuery.of(context).size.width * 0.018),
+              child: Container(
+                padding: const EdgeInsets.all(4.0),
+                decoration: const BoxDecoration(
+                    color: AppColors.iconBookMarkColor,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(5),
+                        bottomRight: Radius.circular(5))),
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.223,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Icon(
-                        Icons.star_rate_rounded,
-                        color: AppColors.yellowColor,
-                        size: 15,
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star_rate_rounded,
+                            color: AppColors.yellowColor,
+                            size: 15,
+                          ),
+                          Text(
+                            "${similar.voteAverage ?? ''}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(fontSize: 10),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.009,
                       ),
                       Text(
-                        "${similar.voteAverage ?? ''}",
+                        similar.title ??
+                            '                                                                                 ',
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall
                             ?.copyWith(fontSize: 10),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.009,
+                      ),
+                      Text(
+                        similar.releaseDate ?? '',
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontSize: 8, color: AppColors.nobelColor),
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.009,
-                  ),
-                  Text(
-                    similar.title ??
-                        '                                                                                 ',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(fontSize: 10),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.009,
-                  ),
-                  Text(
-                    similar.releaseDate ?? '',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(fontSize: 8, color: AppColors.nobelColor),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        )
+            )
+          ],
+        ),
       ],
     );
   }

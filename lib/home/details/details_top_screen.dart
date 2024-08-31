@@ -46,18 +46,21 @@ class DetailsTopScreen extends StatelessWidget {
           children: [
             Padding(
                 padding: const EdgeInsets.all(6.0),
-                child: CachedNetworkImage(
-                  imageUrl: details.posterPath != null
-                      ? "$baseUrl${details.posterPath}"
-                      : '',
-                  placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(
-                          color: AppColors.yellowColor)),
-                  errorWidget: (context, url, error) => const Center(
-                      child: Icon(Icons.error, color: AppColors.yellowColor)),
-                  height: MediaQuery.of(context).size.height * 0.23,
-                  width: MediaQuery.of(context).size.width * 0.25,
-                  fit: BoxFit.fill,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: CachedNetworkImage(
+                    imageUrl: details.posterPath != null
+                        ? "$baseUrl${details.posterPath}"
+                        : '',
+                    placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                            color: AppColors.yellowColor)),
+                    errorWidget: (context, url, error) => const Center(
+                        child: Icon(Icons.error, color: AppColors.yellowColor)),
+                    height: MediaQuery.of(context).size.height * 0.23,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    fit: BoxFit.fill,
+                  ),
                 )),
             Expanded(
               child: SizedBox(
