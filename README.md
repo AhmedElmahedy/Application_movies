@@ -1,16 +1,31 @@
-# app_movies
+🎬 Movie App – Built with Flutter
+A cross-platform mobile app for browsing and discovering movies across multiple genres, built using Flutter and Provider for efficient state management.
 
-A new Flutter project.
+🌟 Key Features
+Explore a wide range of movies by genre (action, drama, etc.)
 
-## Getting Started
+Powerful search functionality for finding movies quickly
 
-This project is a starting point for a Flutter application.
+Detailed movie pages with synopsis, images, and related movie suggestions
 
-A few resources to get you started if this is your first Flutter project:
+Favorites functionality with cloud persistence using Firebase
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Watchlist screen for managing movies to watch later
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Browse by Category UI for genre-based exploration
+
+🧰 Technologies Used
+Flutter
+
+Provider (State Management)
+
+HTTP (API integration)
+
+Firebase (for persisting favorites)
+
+✅ Impact
+Delivered a user-friendly, genre-driven movie browsing experience
+
+Demonstrated skills in API integration, state management, and Firebase database usage
+
+Modular and clean UI using reusable Flutter widgets
